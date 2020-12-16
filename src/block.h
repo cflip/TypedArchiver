@@ -19,6 +19,12 @@ struct block_header {
 	uint32_t date;
 };
 
-void write_block(void* buffer, struct block_header* header, void* data);
+struct block {
+	void* data;
+	int size;
+};
+
+struct block* create_block(struct block_header* header, void* data);
+void free_block(struct block* block);
 
 #endif

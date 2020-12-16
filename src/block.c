@@ -3,8 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-void write_block(void* buffer, struct block_header* header, void* data) {
-	char* p = buffer;
+struct block* create_block(struct block_header* header, void* data) {
+	struct block* result = malloc(sizeof(struct block));
+	result->size = HEADER_BYTES + header->size;
+	result->data = malloc(result->size);
+
+	char* p = result->data;
 
 	memcpy(p,      &header->name, NAME_LENGTH);
 	memcpy(p + 16, &header->type, sizeof(uint8_t));
@@ -12,4 +16,11 @@ void write_block(void* buffer, struct block_header* header, void* data) {
 	memcpy(p + 21, &header->date, sizeof(uint32_t));
 
 	memcpy(p + 25, data, header->size);
+
+	return result;
+}
+
+void free_block(struct block* block) {
+	free(block->data);
+	free(block);
 }
