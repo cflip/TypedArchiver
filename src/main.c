@@ -10,9 +10,15 @@ int main() {
 	struct block_header header = { "Example", TYPE_STRING, strlen(message), 0};
 	localtime((time_t*) &header.date);
 
+	int size = sizeof(struct block_header) + header.size;
+	void* buffer = malloc(size);
+	write_block(buffer, &header, (void*) message);
+
 	FILE* fp = fopen("out.taf", "w");
-	write_block(fp, &header, (void*) message);
+	fwrite(buffer, size, 1, fp);
 	fclose(fp);
+
+	free(buffer);
 
 	return 0;
 }

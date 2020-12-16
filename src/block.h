@@ -17,6 +17,6 @@ struct block_header {
 	uint32_t date;
 };
 
-void write_block(FILE* file, struct block_header* header, void* data);
+void write_block(void* buffer, struct block_header* header, void* data);
 
 #endif

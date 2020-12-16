@@ -1,10 +1,9 @@
 #include "block.h"
 
-void write_block(FILE* file, struct block_header* header, void* data) {
-	fwrite(&header->name, sizeof(header->name), 1, file);
-	fwrite(&header->type, sizeof(header->type), 1, file);
-	fwrite(&header->size, sizeof(header->size), 1, file);
-	fwrite(&header->date, sizeof(header->date), 1, file);
+#include <stdlib.h>
+#include <string.h>
 
-	fwrite(data, header->size, 1, file);
+void write_block(void* buffer, struct block_header* header, void* data) {
+	memcpy(buffer, header, sizeof(struct block_header));
+	memcpy((char*) buffer + sizeof(struct block_header), data, header->size);
 }
