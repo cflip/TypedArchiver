@@ -22,7 +22,7 @@ struct block* create_block(struct block_header* header, void* data) {
 	return result;
 }
 
-void read_block(void* buffer) {
+struct block* read_block(void* buffer) {
 	struct block_header header;
 
 	char* p = buffer;
@@ -41,13 +41,22 @@ void read_block(void* buffer) {
 	printf("BLOCK\nname:\t%.16s\ntype:\t%d\nsize:\t%d\ndate:\t%s\n\n", header.name, header.type, header.size, date_string);
 
 	if (header.type == TYPE_LIST) {
-		// TODO: This should read more than one block depending on the size of the list.
-		read_block(data);
+		int total_bytes = 0;
+		char* index = data;
+
+		do {
+			struct block* block = read_block(index);
+
+			total_bytes += block->size;
+			index += block->size;
+
+			free_block(block);
+		} while (header.size > total_bytes);
 	} else {
 		printf("%.*s\n", header.size, data);
 	}
 
-	free(data);
+	return create_block(&header, data);
 }
 
 void free_block(struct block* block) {

@@ -24,7 +24,7 @@ struct block {
 };
 
 struct block* create_block(struct block_header* header, void* data);
-void read_block(void* buffer);
+struct block* read_block(void* buffer);
 void free_block(struct block* block);
 
 #endif
