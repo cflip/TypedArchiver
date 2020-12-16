@@ -2,11 +2,13 @@
 #define H_BLOCK
 
 #define NAME_LENGTH 16
+#define HEADER_BYTES 25
 
 #include <stdio.h>
 #include <stdint.h>
 
 enum block_type {
+	TYPE_LIST,
 	TYPE_STRING
 };
 
