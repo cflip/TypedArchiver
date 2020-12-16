@@ -37,9 +37,10 @@ void read_test(const char* filename) {
 
 	void* buffer = malloc(size);
 	fread(buffer, size, 1, fp);
-	read_block(buffer);
+	struct block* block = read_block(buffer);
 
 	free(buffer);
+	free_block(block);
 	fclose(fp);
 }
 
