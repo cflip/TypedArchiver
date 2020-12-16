@@ -8,7 +8,7 @@
 int main() {
 	const char* message = "This is an example string to be written into a block.";
 	struct block_header header = { "Example", TYPE_STRING, strlen(message), 0};
-	localtime((time_t*) &header.date);
+	time((time_t*) &header.date);
 
 	int size = sizeof(struct block_header) + header.size;
 	void* buffer = malloc(size);
