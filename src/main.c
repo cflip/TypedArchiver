@@ -4,6 +4,7 @@
 #include <time.h>
 
 #include "block.h"
+#include "directory.h"
 
 void write_test(const char* filename) {
 	// Create a header and data for a string block
@@ -45,6 +46,8 @@ void read_test(const char* filename) {
 }
 
 int main(int argc, char** argv) {
+	convert_directory("./example");
+	/*
 	if (argc <= 2) {
 		printf("Usage:\n%s [-r/-w] [filename]\n", argv[0]);
 		return 0;
@@ -57,5 +60,6 @@ int main(int argc, char** argv) {
 			printf("Please use:\n-r for reading a file.\n-w for writing to a file");
 		}
 	}
+	*/
 	return 0;
 }
