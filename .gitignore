@@ -1,6 +1,6 @@
 *.taf
 
-typedarchiver.*
-*.out
+typedarchiver
+typedarchiver.exe
 
 .vscode
