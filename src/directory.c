@@ -9,7 +9,7 @@
 
 #define PATH_BUF_SIZE 2048
 
-static struct block* convert_file(const char* path) {
+struct block* convert_file(const char* path) {
 	FILE* fp = fopen(path, "r");
 	assert(fp);
 
