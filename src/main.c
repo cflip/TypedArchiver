@@ -46,7 +46,14 @@ void read_test(const char* filename) {
 }
 
 int main(int argc, char** argv) {
-	convert_directory("./example");
+	struct block* example_block = convert_directory("./example");
+
+	FILE* fp = fopen("example.taf", "w");
+	fwrite(example_block->data, example_block->size, 1, fp);
+	fclose(fp);
+
+	free_block(example_block);
+
 	/*
 	if (argc <= 2) {
 		printf("Usage:\n%s [-r/-w] [filename]\n", argv[0]);
